@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeAssist.id - Platform Pencarian ART Modern</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .modal-active { overflow: hidden; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 scroll-smooth">
+
+    <!-- NAVBAR -->
+    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-40 border-b border-slate-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo -->
+                <div class="flex items-center gap-2 cursor-pointer" onclick="navigateTo('beranda')">
+                    <div class="w-10 h-10 bg-sky-500 rounded-xl flex items-center justify-center text-white text-xl shadow-md shadow-sky-200">
+                        <i class="fa-solid fa-house-chimney-user"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-slate-900 tracking-tight">HomeAssist<span class="text-sky-500">.id</span></span>
+                </div>
+                <!-- Menu Desktop -->
+                <div class="hidden md:flex space-x-8 font-medium text-slate-600">
+                    <a href="#beranda" onclick="navigateTo('beranda')" class="nav-link text-sky-500 hover:text-sky-600 transition">Beranda</a>
+                    <a href="#cari-art" onclick="navigateTo('cari-art')" class="nav-link hover:text-sky-500 transition">Cari ART</a>
+                    <a href="#layanan" onclick="navigateTo('layanan')" class="nav-link hover:text-sky-500 transition">Layanan</a>
+                    <a href="#tentang" onclick="navigateTo('tentang')" class="nav-link hover:text-sky-500 transition">Tentang Kami</a>
+                    <a href="#testimoni" onclick="navigateTo('testimoni')" class="nav-link hover:text-sky-500 transition">Testimoni</a>
+                </div>
+                <!-- Auth Buttons -->
+                <div class="hidden md:flex items-center gap-4">
+                    <button onclick="openModal('loginModal')" class="text-slate-600 font-semibold hover:text-sky-500 transition cursor-pointer">Masuk</button>
+                    <button onclick="openModal('registerModal')" class="bg-sky-500 text-white px-5 h-11 rounded-full font-semibold hover:bg-sky-600 transition shadow-md shadow-sky-100 cursor-pointer">Daftar</button>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button onclick="toggleMobileMenu()" class="text-slate-600 focus:outline-none text-2xl">
+                        <i class="fa-solid fa-bars" id="menuIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-100 px-4 py-4 space-y-3 shadow-lg">
+            <a href="#beranda" onclick="navigateTo('beranda')" class="block py-2 font-medium text-slate-600">Beranda</a>
+            <a href="#cari-art" onclick="navigateTo('cari-art')" class="block py-2 font-medium text-slate-600">Cari ART</a>
+            <a href="#layanan" onclick="navigateTo('layanan')" class="block py-2 font-medium text-slate-600">Layanan</a>
+            <a href="#tentang" onclick="navigateTo('tentang')" class="block py-2 font-medium text-slate-600">Tentang Kami</a>
+            <a href="#testimoni" onclick="navigateTo('testimoni')" class="block py-2 font-medium text-slate-600">Testimoni</a>
+            <hr class="border-slate-100">
+            <div class="flex gap-4 pt-2">
+                <button onclick="openModal('loginModal')" class="w-full text-center py-2 text-slate-600 font-semibold border border-slate-200 rounded-xl">Masuk</button>
+                <button onclick="openModal('registerModal')" class="w-full text-center py-2 bg-sky-500 text-white font-semibold rounded-xl">Daftar</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SECTION: BERANDA (HERO) -->
+    <section id="beranda" class="pt-10 pb-20 bg-gradient-to-b from-sky-50 via-white to-slate-50 page-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="bg-sky-100 text-sky-600 px-4 py-1.5 rounded-full text-sm font-semibold tracking-wide uppercase inline-block mb-4">🌟 Aplikasi Pencarian ART #1</span>
+                <h1 class="text-4xl sm:text-5xl font-bold text-slate-900 leading-tight mb-6">
+                    Temukan Asisten Rumah Tangga Profesional dengan <span class="text-sky-500">Mudah, Aman,</span> dan <span class="text-emerald-500">Terpercaya</span>.
+                </h1>
+                <p class="text-slate-600 text-lg mb-8 leading-relaxed">
+                    Solusi digital terbaik untuk kenyamanan rumah Anda. Semua mitra kami telah melewati seleksi ketat, pelatihan berkala, dan verifikasi identitas resmi.
+                </p>
+                <a href="#cari-art" onclick="navigateTo('cari-art')" class="inline-flex items-center gap-3 bg-emerald-500 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-emerald-600 transition shadow-lg shadow-emerald-200 transform hover:-translate-y-0.5">
+                    Cari ART Sekarang <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="relative flex justify-center">
+                <div class="w-72 h-72 sm:w-96 sm:h-96 bg-sky-200 rounded-full absolute -z-10 blur-3xl opacity-60"></div>
+                <!-- Placeholder Ilustrasi Premium menggunakan CSS UI -->
+                <div class="bg-white p-6 rounded-3xl shadow-2xl border border-slate-100 w-full max-w-md relative overflow-hidden">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-500 text-xl"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div>
+                            <h4 class="font-bold text-slate-900">Garansi Keamanan 100%</h4>
+                            <p class="text-xs text-slate-500">Pemeriksaan Latar Belakang & Medis</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-slate-50 p-4 rounded-xl flex justify-between items-center">
+                            <span class="text-sm font-medium text-slate-600">Total Pengguna Aktif</span>
+                            <span class="text-base font-bold text-sky-500">12,450+ Rumah</span>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl flex justify-between items-center">
+                            <span class="text-sm font-medium text-slate-600">Mitra Tersertifikasi</span>
+                            <span class="text-base font-bold text-emerald-500">3,800+ ART</span>
+                        </div>
+                    </div>
+                    <div class="mt-6 p-4 bg-sky-50 rounded-xl border border-sky-100 flex items-center gap-3">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-slate-300 border-2 border-white flex items-center justify-center text-[10px] font-bold">👩</div>
+                            <div class="w-8 h-8 rounded-full bg-slate-400 border-2 border-white flex items-center justify-center text-[10px] font-bold">👩‍🦱</div>
+                            <div class="w-8 h-8 rounded-full bg-slate-500 border-2 border-white flex items-center justify-center text-[10px] font-bold">🧑</div>
+                        </div>
+                        <span class="text-xs font-semibold text-sky-700">Mitra siap bekerja hari ini!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: CARI ART & FILTER -->
+    <section id="cari-art" class="py-20 bg-slate-50 page-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 sm:text-4xl mb-4">Pilih Kategori Mitra Terbaik</h2>
+                <p class="text-slate-600">Gunakan filter cerdas di bawah untuk menyaring kriteria asisten rumah tangga yang paling pas untuk kebutuhan keluarga Anda.</p>
+            </div>
+
+            <!-- Kategori Utama Berbentuk Grid Tombol -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <button class="category-btn p-4 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-sky-500 hover:shadow-md transition text-center flex flex-col items-center gap-3 group active-cat" onclick="filterCategory('Semua', this)">
+                    <div class="w-12 h-12 bg-sky-50 text-sky-500 rounded-xl flex items-center justify-center text-xl group-hover:bg-sky-500 group-hover:text-white transition"><i class="fa-solid fa-border-all"></i></div>
+                    <span class="font-semibold text-sm">Semua Layanan</span>
+                </button>
+                <button class="category-btn p-4 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-sky-500 hover:shadow-md transition text-center flex flex-col items-center gap-3 group" onclick="filterCategory('ART Harian', this)">
+                    <div class="w-12 h-12 bg-sky-50 text-sky-500 rounded-xl flex items-center justify-center text-xl group-hover:bg-sky-500 group-hover:text-white transition"><i class="fa-solid fa-clock"></i></div>
+                    <span class="font-semibold text-sm">ART Harian</span>
+                </button>
+                <button class="category-btn p-4 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-sky-500 hover:shadow-md transition text-center flex flex-col items-center gap-3 group" onclick="filterCategory('Baby Sitter', this)">
+                    <div class="w-12 h-12 bg-sky-50 text-sky-500 rounded-xl flex items-center justify-center text-xl group-hover:bg-sky-500 group-hover:text-white transition"><i class="fa-solid fa-baby"></i></div>
+                    <span class="font-semibold text-sm">Baby Sitter</span>
+                </button>
+                <button class="category-btn p-4 bg-white rounded-2xl shadow-sm border border-slate-100 hover:border-sky-500 hover:shadow-md transition text-center flex flex-col items-center gap-3 group" onclick="filterCategory('Perawat Lansia', this)">
+                    <div class="w-12 h-12 bg-sky-50 text-sky-500 rounded-xl flex items-center justify-center text-xl group-hover:bg-sky-500 group-hover:text-white transition"><i class="fa-solid fa-wheelchair"></i></div>
+                    <span class="font-semibold text-sm">Perawat Lansia</span>
+                </button>
+            </div>
+
+            <!-- Panel Filter Advance -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Lokasi Penempatan</label>
+                    <select class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500">
+                        <option>Bandung, Jawa Barat</option>
+                        <option>Jakarta Selatan</option>
+                        <option>Surabaya, Jawa Timur</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Pengalaman Kerja</label>
+                    <select class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500">
+                        <option>Semua Pengalaman</option>
+                        <option>1 - 3 Tahun</option>
+                        <option>&gt; 3 Tahun</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Status Menginap</label>
+                    <select class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500">
+                        <option>Bisa Menginap / Pulang</option>
+                        <option>Menginap</option>
+                        <option>Tidak Menginap</option>
+                    </select>
+                </div>
+                <div class="flex items-end">
+                    <button class="w-full bg-sky-500 text-white h-12 rounded-xl font-semibold hover:bg-sky-600 transition flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-sky-100">
+                        <i class="fa-solid fa-sliders"></i> Terapkan Filter
+                    </button>
+                </div>
+            </div>
+
+            <!-- Container Grid List Mitra -->
+            <div id="mitraGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Data Di-render Dinamis Oleh JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: LAYANAN -->
+    <section id="layanan" class="py-20 bg-white page-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 sm:text-4xl mb-4">Ekosistem Layanan HomeAssist.id</h2>
+                <p class="text-slate-600">Kami menyediakan variasi penempatan kerja terlengkap demi kenyamanan urusan domestik rumah tangga Anda.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:shadow-xl transition">
+                    <div class="w-12 h-12 bg-sky-500 text-white rounded-xl flex items-center justify-center text-xl mb-6"><i class="fa-solid fa-house-circle-check"></i></div>
+                    <h3 class="font-bold text-lg mb-2">ART Menginap</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">Mitra kerja yang tinggal menetap di kediaman Anda, fokus penuh mendampingi harian.</p>
+                </div>
+                <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:shadow-xl transition">
+                    <div class="w-12 h-12 bg-sky-500 text-white rounded-xl flex items-center justify-center text-xl mb-6"><i class="fa-solid fa-broom"></i></div>
+                    <h3 class="font-bold text-lg mb-2">Cleaning Service</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">Jasa pembersihan mendalam berkala untuk apartemen, rumah baru, atau pasca-acara.</p>
+                </div>
+                <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:shadow-xl transition">
+                    <div class="w-12 h-12 bg-sky-500 text-white rounded-xl flex items-center justify-center text-xl mb-6"><i class="fa-solid fa-kitchen-set"></i></div>
+                    <h3 class="font-bold text-lg mb-2">Jasa Memasak</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">Mitra ahli masak khusus menyusun hidangan bergizi harian keluarga besar Anda.</p>
+                </div>
+                <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:shadow-xl transition">
+                    <div class="w-12 h-12 bg-sky-500 text-white rounded-xl flex items-center justify-center text-xl mb-6"><i class="fa-solid fa-user-nurse"></i></div>
+                    <h3 class="font-bold text-lg mb-2">Home Care Assistant</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">Asisten medis non-darurat bersertifikat khusus perawat pemulihan pasca operasi.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: TENTANG KAMI -->
+    <section id="tentang" class="py-20 bg-slate-50 page-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-3xl font-bold text-slate-900 sm:text-4xl mb-6">Mengapa Harus Memilih HomeAssist.id?</h2>
+                <p class="text-slate-600 mb-6 leading-relaxed">Kami lahir sebagai jawaban atas kekhawatiran banyak keluarga dalam mencari pekerja domestik yang jujur dan berdedikasi tinggi. Melalui integrasi teknologi terpadu, kami menyortir rekam jejak kriminal, keahlian nyata, serta kesiapan mental para mitra.</p>
+                <div class="space-y-4">
+                    <div class="flex gap-4">
+                        <div class="text-emerald-500 text-xl"><i class="fa-solid fa-circle-check"></i></div>
+                        <div>
+                            <h4 class="font-bold text-slate-900">Pengecekan Latar Belakang Ketat</h4>
+                            <p class="text-sm text-slate-500">Verifikasi dokumen identitas resmi negara, SKCK dari Kepolisian, serta peninjauan domisili asli.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="text-emerald-500 text-xl"><i class="fa-solid fa-circle-check"></i></div>
+                        <div>
+                            <h4 class="font-bold text-slate-900">Sistem Garansi Terjamin</h4>
+                            <p class="text-sm text-slate-500">Apabila dalam waktu kontrak berjalan mitra tidak cocok, kami siapkan penukaran tanpa biaya tambahan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm grid grid-cols-2 gap-6 text-center">
+                <div class="p-6 bg-slate-50 rounded-2xl">
+                    <div class="text-3xl font-bold text-sky-500 mb-2">98.4%</div>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Tingkat Kepuasan</p>
+                </div>
+                <div class="p-6 bg-slate-50 rounded-2xl">
+                    <div class="text-3xl font-bold text-emerald-500 mb-2">2 Jam</div>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Durasi Cepat Match</p>
+                </div>
+                <div class="p-6 bg-slate-50 rounded-2xl">
+                    <div class="text-3xl font-bold text-slate-900 mb-2">100%</div>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Bebas Biaya Tersembunyi</p>
+                </div>
+                <div class="p-6 bg-slate-50 rounded-2xl">
+                    <div class="text-3xl font-bold text-amber-500 mb-2">A+ Rating</div>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Akreditasi Startup</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: TESTIMONI -->
+    <section id="testimoni" class="py-20 bg-white page-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 sm:text-4xl mb-4">Cerita Sukses Pengguna Kami</h2>
+                <p class="text-slate-600">Ratusan ulasan bintang lima telah diberikan oleh para keluarga cerdas di Indonesia.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm">
+                    <div class="flex text-amber-400 gap-1 mb-4"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-slate-600 text-sm italic mb-6">"Sangat terbantu mencari baby sitter dalam waktu singkat di platform ini. Dokumen verifikasi lengkap dan asistennya sangat menyayangi anak kami."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-slate-300 rounded-full flex items-center justify-center text-sm font-bold">👩‍🦰</div>
+                        <div>
+                            <h4 class="font-bold text-sm">Keluarga Pratama</h4>
+                            <p class="text-xs text-slate-500">Bandung, Jawa Barat</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm">
+                    <div class="flex text-amber-400 gap-1 mb-4"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-slate-600 text-sm italic mb-6">"Fitur chat langsung dan transparansi riwayat review majikan sebelumnya sangat membuat tenang. Pembayaran transparan dan profesional."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-slate-300 rounded-full flex items-center justify-center text-sm font-bold">👨</div>
+                        <div>
+                            <h4 class="font-bold text-sm">Hendra Wijaya</h4>
+                            <p class="text-xs text-slate-500">Jakarta Selatan</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm">
+                    <div class="flex text-amber-400 gap-1 mb-4"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-slate-600 text-sm italic mb-6">"Perawat lansia yang kami sewa dari sini sangat memahami standar medis harian orang tua kami. Benar-benar lulus pelatihan resmi!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-slate-300 rounded-full flex items-center justify-center text-sm font-bold">👩</div>
+                        <div>
+                            <h4 class="font-bold text-sm">Arini S.</h4>
+                            <p class="text-xs text-slate-500">Surabaya, Jawa Timur</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 pt-16 pb-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div>
+                <div class="flex items-center gap-2 mb-6">
+                    <div class="w-8 h-8 bg-sky-500 rounded-lg flex items-center justify-center text-white text-base"><i class="fa-solid fa-house-chimney-user"></i></div>
+                    <span class="text-xl font-bold text-white tracking-tight">HomeAssist<span class="text-sky-500">.id</span></span>
+                </div>
+                <p class="text-sm leading-relaxed mb-6">Platform pemesanan Asisten Rumah Tangga (ART) online dengan standar keamanan terverifikasi, modern, dan profesional di Indonesia.</p>
+                <div class="flex gap-4 text-lg">
+                    <a href="#" class="hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-white transition"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" class="hover:text-white transition"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-6">Layanan Kami</h4>
+                <ul class="space-y-3 text-sm">
+                    <li><a href="#cari-art" onclick="navigateTo('cari-art')" class="hover:text-white transition">ART Harian</a></li>
+                    <li><a href="#cari-art" onclick="navigateTo('cari-art')" class="hover:text-white transition">Baby Sitter</a></li>
+                    <li><a href="#cari-art" onclick="navigateTo('cari-art')" class="hover:text-white transition">Perawat Lansia</a></li>
+                    <li><a href="#cari-art" onclick="navigateTo('cari-art')" class="hover:text-white transition">Home Care Assistant</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-6">Keamanan & Bantuan</h4>
+                <ul class="space-y-3 text-sm">
+                    <li><a href="#" class="hover:text-white transition">Pusat FAQ</a></li>
+                    <li><a href="#" class="hover:text-white transition">Kebijakan Privasi</a></li>
+                    <li><a href="#" class="hover:text-white transition">Cara Booking Mitra</a></li>
+                    <li><a href="#" class="hover:text-white transition">Enkripsi Data SSL</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-6">Kontak CS</h4>
+                <ul class="space-y-3 text-sm">
+                    <li><i class="fa-solid fa-location-dot mr-2"></i> Jl. Asia Afrika No. 12, Bandung</li>
+                    <li><i class="fa-solid fa-phone mr-2"></i> (022) 456-7890</li>
+                    <li><i class="fa-solid fa-envelope mr-2"></i> support@homeassist.id</li>
+                    <li class="pt-2"><span class="bg-emerald-500/10 text-emerald-400 px-3 py-1 rounded-full text-xs font-semibold border border-emerald-500/20"><i class="fa-solid fa-circle text-[8px] mr-1.5 align-middle"></i>CS WhatsApp 24/7 Aktif</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-800 pt-8 text-center text-xs text-slate-500">
+            Copyright © 2026 HomeAssist.id. Hak Cipta Dilindungi Undang-Undang.
+        </div>
+    </footer>
+
+    <!-- ================= MODAL LOGIN ================= -->
+    <div id="loginModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden transform transition p-6 relative">
+            <button onclick="closeModal('loginModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-xl cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+            <div class="text-center mb-6">
+                <h3 class="text-2xl font-bold text-slate-900">Selamat Datang Kembali</h3>
+                <p class="text-sm text-slate-500">Masuk untuk mencari dan melakukan kontrak kerja mitra</p>
+            </div>
+            <form onsubmit="handleAuthSubmit(event, 'login')" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Alamat Email</label>
+                    <input type="email" required placeholder="nama@email.com" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Kata Sandi</label>
+                    <input type="password" required placeholder="••••••••" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500">
+                </div>
+                <div class="text-right"><a href="#" class="text-xs text-sky-500 hover:underline">Lupa Password?</a></div>
+                <button type="submit" class="w-full bg-sky-500 text-white py-3 rounded-xl font-semibold hover:bg-sky-600 transition cursor-pointer">Masuk Sekarang</button>
+            </form>
+            <div class="mt-6 text-center text-xs text-slate-500">Belum punya akun? <button onclick="closeModal('loginModal'); openModal('registerModal');" class="text-sky-500 font-semibold hover:underline cursor-pointer">Daftar Akun Baru</button></div>
+        </div>
+    </div>
+
+    <!-- ================= MODAL REGISTER ================= -->
+    <div id="registerModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden transform transition p-6 relative">
+            <button onclick="closeModal('registerModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-xl cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+            <div class="text-center mb-6">
+                <h3 class="text-2xl font-bold text-slate-900">Buat Akun Baru</h3>
+                <p class="text-sm text-slate-500">Dapatkan akses penuh pencarian asisten terbaik terverifikasi</p>
+            </div>
+            <form onsubmit="handleAuthSubmit(event, 'register')" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Nama Lengkap</label>
+                    <input type="text" required placeholder="Nama lengkap Anda" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Nomor WhatsApp</label>
+                    <input type="tel" required placeholder="0812xxxxxxx" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Alamat Email</label>
+                    <input type="email" required placeholder="nama@email.com" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Kata Sandi Baru</label>
+                    <input type="password" required placeholder="Minimal 8 karakter" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500">
+                </div>
+                <button type="submit" class="w-full bg-emerald-500 text-white py-3 rounded-xl font-semibold hover:bg-emerald-600 transition cursor-pointer">Registrasi Sekarang</button>
+            </form>
+            <div class="mt-6 text-center text-xs text-slate-500">Sudah memiliki akun? <button onclick="closeModal('registerModal'); openModal('loginModal');" class="text-sky-500 font-semibold hover:underline cursor-pointer">Login Disini</button></div>
+        </div>
+    </div>
+
+    <!-- ================= MODAL DETAIL BIODATA MITRA (DINAMIS & UNIK) ================= -->
+    <div id="detailModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden transform transition relative my-8">
+            <!-- Header Modal -->
+            <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+                <div class="flex items-center gap-2">
+                    <span class="bg-emerald-100 text-emerald-600 text-xs font-bold px-3 py-1 rounded-full"><i class="fa-solid fa-circle text-[6px] mr-1.5 align-middle"></i>Tersedia</span>
+                    <span class="text-slate-500 text-xs font-medium">ID Profil Terverifikasi: HA-8820</span>
+                </div>
+                <button onclick="closeModal('detailModal')" class="text-slate-400 hover:text-slate-600 text-xl cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <!-- Konten Detail Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3" id="detailModalContent">
+                <!-- Data dimasukkan via Javascript berdasarkan ID mitra yang diklik -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= CHAT COMPONENT SIMULATION ================= -->
+    <div id="chatModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[550px] relative">
+            <!-- Header Chat -->
+            <div class="bg-sky-500 p-4 text-white flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-lg" id="chatAvatar">👩</div>
+                    <div>
+                        <h4 class="font-bold text-sm" id="chatTitle">Nama Mitra</h4>
+                        <p class="text-xs text-sky-100 flex items-center gap-1"><span class="w-2 h-2 bg-emerald-400 rounded-full inline-block animate-pulse"></span> Online</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 text-lg">
+                    <button class="hover:text-sky-100 cursor-pointer"><i class="fa-solid fa-phone"></i></button>
+                    <button class="hover:text-sky-100 cursor-pointer"><i class="fa-solid fa-video"></i></button>
+                    <button onclick="closeModal('chatModal')" class="text-white hover:text-sky-100 text-xl cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            <!-- Notifikasi Booking Callout -->
+            <div class="p-2.5 bg-emerald-50 border-b border-emerald-100 text-center flex justify-between items-center px-4">
+                <span class="text-xs font-medium text-emerald-800">Sudah mantap memilih mitra ini?</span>
+                <button onclick="alert('Kontrak Pengajuan Berhasil Terkirim ke Sistem! Perusahaan akan menghubungi Anda via WhatsApp dalam 1 jam.')" class="bg-emerald-500 text-white text-[11px] font-bold px-3 py-1.5 rounded-lg shadow-sm hover:bg-emerald-600 transition">Ajukan Booking</button>
+            </div>
+            <!-- Kolom Percakapan -->
+            <div class="flex-1 p-4 overflow-y-auto space-y-3 bg-slate-50 flex flex-col justify-end" id="chatBox">
+                <div class="bg-white p-3 rounded-2xl rounded-tl-none text-xs text-slate-700 max-w-[80%] self-start shadow-sm">
+                    Halo Bapak/Ibu, terima kasih sudah menghubungi saya di HomeAssist.id. Ada yang bisa saya bantu terkait kebutuhan di rumah? 😊
+                </div>
+            </div>
+            <!-- Input Bar -->
+            <div class="p-3 border-t border-slate-100 bg-white flex items-center gap-2">
+                <button class="w-9 h-9 text-slate-400 hover:text-sky-500 transition text-lg"><i class="fa-solid fa-circle-plus"></i></button>
+                <input type="text" id="chatInput" placeholder="Tulis balasan pesan di sini..." class="flex-1 bg-slate-50 border border-slate-200 rounded-full px-4 py-2 text-xs focus:outline-none focus:border-sky-500" onkeydown="if(event.key === 'Enter') sendSimulatedMessage()">
+                <button onclick="sendSimulatedMessage()" class="w-9 h-9 bg-sky-500 text-white rounded-full flex items-center justify-center text-sm shadow-md hover:bg-sky-600 transition"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================= CORE JAVASCRIPT LOGIC ================= -->
+    <script>
+        // DATA MITRA DENGAN BIODATA DETAIL YANG UNIK DAN BERBEDA
+        const daftarMitra = [
+            {
+                id: 1,
+                nama: "Siti Rahma",
+                umur: 28,
+                kategori: "ART Harian",
+                domisili: "Bandung, Jawa Barat",
+                pengalaman: "3 Tahun",
+                gaji: "Rp2.500.000 / bln",
+                rating: "4.9",
+                ulasanCount: 42,
+                keahlian: ["Memasak Masakan Sunda", "Menyetrika Kain Halus", "Deep Cleaning Kamar Mandi"],
+                avatar: "👩",
+                agama: "Islam",
+                statusPernikahan: "Menikah",
+                pendidikan: "SMP Negeri 2 Karawang",
+                bahasa: "Bahasa Indonesia, Sunda",
+                sertifikat: "Sertifikat Standar Kebersihan Komunitas & Sanitasi Rumah Tangga (2024)",
+                komentar: "Sangat rapi kalau menyetrika baju, tepat waktu dan jujur sekali."
+            },
+            {
+                id: 2,
+                nama: "Maria Agustina",
+                umur: 34,
+                kategori: "Baby Sitter",
+                domisili: "Jakarta Selatan",
+                pengalaman: "6 Tahun",
+                gaji: "Rp4.200.000 / bln",
+                rating: "5.0",
+                ulasanCount: 58,
+                keahlian: ["Edukasi Motorik Anak Balita", "Sterilisasi Alat Bayi", "Memasak Bubur MPASI Sehat"],
+                avatar: "👩‍🦱",
+                agama: "Kristen Protestan",
+                statusPernikahan: "Belum Menikah",
+                pendidikan: "SMA Kristen Penabur",
+                bahasa: "Bahasa Indonesia, Inggris Dasar",
+                sertifikat: "Sertifikat Pengasuhan Anak Usia Dini (PAUD) dari Yayasan Kasih Ibu (2023)",
+                komentar: "Anak saya sangat nempel dengan Sus Maria, sabar sekali mendidik anak kecil."
+            },
+            {
+                id: 3,
+                nama: "Budi Santoso",
+                umur: 41,
+                kategori: "Perawat Lansia",
+                domisili: "Surabaya, Jawa Timur",
+                pengalaman: "8 Tahun",
+                gaji: "Rp4.800.000 / bln",
+                rating: "4.8",
+                ulasanCount: 31,
+                keahlian: ["Fisioterapi Dasar Lansia", "Manajemen Cek Gula Darah/Tensi", "Pendampingan Pasca Stroke"],
+                avatar: "👨",
+                agama: "Islam",
+                statusPernikahan: "Menikah",
+                pendidikan: "SMK Kesehatan Keperawatan",
+                bahasa: "Bahasa Indonesia, Jawa",
+                sertifikat: "Sertifikat Keperawatan Geriatri & Caregiver Profesional Indonesia (2022)",
+                komentar: "Pak Budi sangat telaten merawat ayah saya yang pasca operasi stroke. Komunikatif sekali."
+            }
+        ];
+
+        // RENDER DATA MITRA KE GRID SEJAK AWAL WEBSITE DIBUKA
+        function renderMitraList(data) {
+            const container = document.getElementById('mitraGrid');
+            container.innerHTML = "";
+            
+            if(data.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 font-medium"><i class="fa-solid fa-folder-open text-4xl mb-3 block"></i>Maaf, tidak ditemukan mitra dengan kategori tersebut.</div>`;
+                return;
+            }
+
+            data.forEach(item => {
+                let keahlianBadges = item.keahlian.map(skill => `<span class="bg-slate-100 text-slate-600 text-[11px] font-medium px-2 py-1 rounded-md">${skill}</span>`).join(' ');
+                
+                container.innerHTML += `
+                    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl transition flex flex-col justify-between overflow-hidden relative group">
+                        <div class="absolute top-4 left-4 z-10 bg-emerald-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-circle text-[6px] mr-1 inline-block align-middle"></i> Tersedia</div>
+                        <button class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-slate-400 hover:text-rose-500 shadow-sm transition"><i class="fa-solid fa-heart"></i></button>
+                        
+                        <div class="p-6 pt-12 text-center border-b border-slate-50 flex-1">
+                            <div class="w-20 h-20 bg-gradient-to-tr from-sky-400 to-sky-200 rounded-full mx-auto flex items-center justify-center text-4xl shadow-md mb-4">${item.avatar}</div>
+                            <h3 class="font-bold text-lg text-slate-900">${item.nama} <span class="text-sm font-normal text-slate-500">(${item.umur} Th)</span></h3>
+                            <p class="text-xs font-semibold text-sky-500 bg-sky-50 px-2.5 py-0.5 rounded-full inline-block mt-1">${item.kategori}</p>
+                            <div class="flex items-center justify-center gap-1 text-sm font-bold text-slate-800 mt-3"><i class="fa-solid fa-star text-amber-400"></i> ${item.rating} <span class="text-xs font-normal text-slate-400">(${item.ulasanCount} ulasan)</span></div>
+                            
+                            <div class="mt-4 text-left space-y-2 text-xs text-slate-600">
+                                <p><i class="fa-solid fa-location-dot w-5 text-slate-400"></i> ${item.domisili}</p>
+                                <p><i class="fa-solid fa-briefcase w-5 text-slate-400"></i> Pengalaman ${item.pengalaman}</p>
+                            </div>
+                            <div class="mt-4 flex flex-wrap gap-1.5 justify-center">${keahlianBadges}</div>
+                        </div>
+
+                        <div class="p-4 bg-slate-50 flex items-center justify-between gap-3 border-t border-slate-100">
+                            <button onclick="openDetailMitra(${item.id})" class="flex-1 text-center bg-white border border-slate-200 text-slate-700 py-2.5 rounded-xl text-xs font-bold hover:border-sky-500 hover:text-sky-500 transition cursor-pointer shadow-sm">Lihat Profil</button>
+                            <button onclick="openChatWithMitra('${item.nama}', '${item.avatar}')" class="flex-1 text-center bg-sky-500 text-white py-2.5 rounded-xl text-xs font-bold hover:bg-sky-600 transition cursor-pointer shadow-md shadow-sky-100"><i class="fa-solid fa-comments mr-1"></i> Chat</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // FILTER KATEGORI MENU INTERAKTIF
+        function filterCategory(cat, btnElement) {
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('border-sky-500', 'bg-sky-500', 'text-white', 'active-cat'));
+            btnElement.classList.add('border-sky-500');
+
+            if(cat === 'Semua') {
+                renderMitraList(daftarMitra);
+            } else {
+                const filtered = daftarMitra.filter(m => m.kategori === cat);
+                renderMitraList(filtered);
+            }
+        }
+
+        // MENU NAVIGASI AKTIF HIGHLIGHT & HANDLING AKSES MENU
+        function navigateTo(sectionId) {
+            // Tutup mobile menu jika terbuka
+            document.getElementById('mobileMenu').classList.add('hidden');
+            document.getElementById('menuIcon').className = "fa-solid fa-bars";
+
+            // Atur class Active di link Desktop
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('text-sky-500');
+                if(link.getAttribute('href') === `#${sectionId}`) {
+                    link.classList.add('text-sky-500');
+                }
+            });
+        }
+
+        // POPUP MODAL GENERIC CONTROLLER
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+            document.body.classList.add('modal-active');
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+            document.body.classList.remove('modal-active');
+        }
+
+        // LOGIN & REGISTER SIMULATION HANDLING SUCCESSFULLY ACCESSED
+        function handleAuthSubmit(event, type) {
+            event.preventDefault();
+            if(type === 'login') {
+                alert("Akses Sukses! Selamat Datang di Dashboard Pengguna HomeAssist.id.");
+                closeModal('loginModal');
+            } else {
+                alert("Registrasi Berhasil! Silahkan verifikasi email Anda dan lakukan masuk.");
+                closeModal('registerModal');
+                openModal('loginModal');
+            }
+        }
+
+        // RENDER DINAMIS BIODATA DETAIL TIAP MITRA YANG UNIK
+        function openDetailMitra(id) {
+            const mitra = daftarMitra.find(m => m.id === id);
+            const contentContainer = document.getElementById('detailModalContent');
+
+            let listSkills = mitra.keahlian.map(s => `<li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500 text-xs"></i> ${s}</li>`).join('');
+
+            contentContainer.innerHTML = `
+                <!-- Kolom Kiri: Foto Utama & Badge Pengaman Terverifikasi -->
+                <div class="p-6 border-r border-slate-100 flex flex-col items-center bg-slate-50/50">
+                    <div class="w-32 h-32 bg-gradient-to-tr from-sky-400 to-sky-200 rounded-full flex items-center justify-center text-6xl shadow-xl mb-4 border-4 border-white">${mitra.avatar}</div>
+                    <h3 class="text-xl font-bold text-slate-900 text-center">${mitra.nama}</h3>
+                    <p class="text-xs font-semibold text-sky-500 bg-sky-50 px-3 py-1 rounded-full mt-1 mb-6">${mitra.kategori}</p>
+
+                    <!-- INDIKATOR KEAMANAN -->
+                    <div class="w-full space-y-2.5 text-xs">
+                        <div class="bg-emerald-50 text-emerald-800 p-2.5 rounded-xl flex items-center gap-2 border border-emerald-100"><i class="fa-solid fa-id-card"></i> <span><strong>Identitas Terverifikasi</strong> (KTP, KK valid)</span></div>
+                        <div class="bg-emerald-50 text-emerald-800 p-2.5 rounded-xl flex items-center gap-2 border border-emerald-100"><i class="fa-solid fa-user-shield"></i> <span><strong>Sudah Background Check</strong> (Bebas Kriminal)</span></div>
+                        <div class="bg-emerald-50 text-emerald-800 p-2.5 rounded-xl flex items-center gap-2 border border-emerald-100"><i class="fa-solid fa-graduation-cap"></i> <span><strong>Lulus Pelatihan</strong> Internal</span></div>
+                        <div class="bg-amber-50 text-amber-800 p-2.5 rounded-xl flex items-center gap-2 border border-amber-100"><i class="fa-solid fa-medal"></i> <span><strong>Recommended ART</strong> Pilihan Utama</span></div>
+                    </div>
+                </div>
+
+                <!-- Kolom Tengah & Kanan: Biodata Lengkap Khusus -->
+                <div class="md:col-span-2 p-6 space-y-6 max-h-[480px] overflow-y-auto">
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Biodata Pribadi Lengkap</h4>
+                        <div class="grid grid-cols-2 gap-x-4 gap-y-2.5 text-sm">
+                            <p class="text-slate-500">Umur / Usia:</p><p class="font-medium text-slate-800">${mitra.umur} Tahun</p>
+                            <p class="text-slate-500">Agama:</p><p class="font-medium text-slate-800">${mitra.agama}</p>
+                            <p class="text-slate-500">Status Pernikahan:</p><p class="font-medium text-slate-800">${mitra.statusPernikahan}</p>
+                            <p class="text-slate-500">Pendidikan Terakhir:</p><p class="font-medium text-slate-800">${mitra.pendidikan}</p>
+                            <p class="text-slate-500">Domisili Asal:</p><p class="font-medium text-slate-800">${mitra.domisili}</p>
+                            <p class="text-slate-500">Bahasa Dikuasai:</p><p class="font-medium text-slate-800">${mitra.bahasa}</p>
+                        </div>
+                    </div>
+                    <hr class="border-slate-100">
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Keahlian & Kemampuan Spesifik</h4>
+                        <ul class="text-sm space-y-2 text-slate-700">${listSkills}</ul>
+                    </div>
+                    <hr class="border-slate-100">
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Sertifikasi Resmi</h4>
+                        <p class="text-xs text-slate-600 bg-slate-50 p-3 rounded-xl border border-slate-200"><i class="fa-solid fa-award text-sky-500 mr-1.5"></i> ${mitra.sertifikat}</p>
+                    </div>
+                    <hr class="border-slate-100">
+                    <div class="grid grid-cols-2 gap-4 bg-slate-900 text-white p-4 rounded-2xl">
+                        <div>
+                            <span class="block text-[10px] uppercase font-bold tracking-widest text-slate-400">Ekspektasi Gaji</span>
+                            <span class="text-lg font-bold text-emerald-400">${mitra.gaji}</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-[10px] uppercase font-bold tracking-widest text-slate-400">Jadwal Kerja</span>
+                            <span class="text-xs font-semibold text-sky-300">Senin - Sabtu (08.00 - 17.00)</span>
+                        </div>
+                    </div>
+                    <hr class="border-slate-100">
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Ulasan Autentik Majikan Sebelumnya</h4>
+                        <div class="bg-amber-50/60 border border-amber-100 p-4 rounded-xl text-xs">
+                            <div class="flex gap-1 text-amber-400 mb-2"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> <span class="text-slate-800 font-bold ml-1">${mitra.rating}/5.0</span></div>
+                            <p class="text-slate-600 italic">"${mitra.komentar}"</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            openModal('detailModal');
+        }
+
+        // FITUR LIVE REAL-TIME CHAT SIMULATION
+        function openChatWithMitra(nama, avatar) {
+            document.getElementById('chatTitle').innerText = nama;
+            document.getElementById('chatAvatar').innerText = avatar;
+            
+            // reset percakapan awal
+            document.getElementById('chatBox').innerHTML = `
+                <div class="bg-white p-3 rounded-2xl rounded-tl-none text-xs text-slate-700 max-w-[80%] self-start shadow-sm">
+                    Halo Bapak/Ibu, terima kasih sudah menghubungi saya ${nama} di HomeAssist.id. Ada yang bisa saya bantu terkait penugasan kerja? 😊
+                </div>
+            `;
+            openModal('chatModal');
+        }
+
+        function sendSimulatedMessage() {
+            const input = document.getElementById('chatInput');
+            const box = document.getElementById('chatBox');
+            if(input.value.trim() === "") return;
+
+            // Pesan Keluar Anda
+            box.innerHTML += `
+                <div class="bg-sky-500 text-white p-3 rounded-2xl rounded-tr-none text-xs max-w-[80%] self-end shadow-sm">
+                    ${input.value}
+                </div>
+            `;
+            
+            let currentText = input.value;
+            input.value = "";
+            box.scrollTop = box.scrollHeight;
+
+            // Balasan Bot Otomatis Simulasi Real-Time 1 Detik Kemudian
+            setTimeout(() => {
+                box.innerHTML += `
+                    <div class="bg-white p-3 rounded-2xl rounded-tl-none text-xs text-slate-700 max-w-[80%] self-start shadow-sm">
+                        Baik, instruksi dicatat. Silahkan klik tombol <strong>"Ajukan Booking"</strong> di atas agar jadwal wawancara saya di-lock oleh admin perusahaan ya, Terima kasih!
+                    </div>
+                `;
+                box.scrollTop = box.scrollHeight;
+            }, 1200);
+        }
+
+        // MOBILE MENU RESPONSIVE CONTROLLER
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('menuIcon');
+            if(menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.className = "fa-solid fa-xmark";
+            } else {
+                menu.classList.add('hidden');
+                icon.className = "fa-solid fa-bars";
+            }
+        }
+
+        // RENDER AWAL SEWAKTU WEBSITE SELESAI DIMUAT
+        window.onload = function() {
+            renderMitraList(daftarMitra);
+        };
+    </script>
+</body>
+</html>
